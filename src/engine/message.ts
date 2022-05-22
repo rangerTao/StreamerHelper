@@ -6,7 +6,7 @@ import * as dayjs from "dayjs";
 import * as chalk from "chalk";
 import { Logger } from "log4js";
 
-import { emitter, FileHound } from "@/util/utils";
+import { emitter, FileHound, getTimestamp, getTitlePostfix } from "@/util/utils";
 import { getExtendedLogger } from "@/log";
 import { FileStatus } from "@/type/fileStatus";
 import { roomPathStatus } from "@/engine/roomPathStatus";
@@ -38,7 +38,7 @@ export class Recorder {
     this._recorderTask = recorderTask
 
     this.isPost = false
-    this._recorderTask.timeV = `${dayjs().format("YYYY-MM-DD")} ${this.getTitlePostfix()}`;
+    this._recorderTask.timeV = `${dayjs().format("YYYY-MM-DD")} ${getTitlePostfix()}`;
 
     this.logger = getExtendedLogger(`Recorder ${this._recorderTask.recorderName}`)
   }
@@ -127,6 +127,10 @@ export class Recorder {
       // ffmpeg by default the program logs to stderr ,正常流日志不记录
       // logger.error(data.toString("utf8"));
     });
+
+    this.logger.info(`${this._recorderTask.recorderName}+${dayjs().format("YYYY-MM-DD")}+${getTitlePostfix()}记录直播启动时间${getTimestamp()}`)
+    global.app.durationPool.set(`${this._recorderTask.recorderName}+${dayjs().format("YYYY-MM-DD")}+${getTitlePostfix()}`,getTimestamp())
+
     this.App.on("exit", (code: number) => {
       this.ffmpegProcessEnd = true
 
@@ -188,7 +192,8 @@ export class Recorder {
         source: recorderTask.streamerInfo.source || '',
         dynamic: recorderTask.streamerInfo.dynamic || '',
         copyright: recorderTask.streamerInfo.copyright ?? 2,
-        timeV: this._recorderTask.timeV
+        timeV: this._recorderTask.timeV,
+        duration : this.recorderTask.streamerInfo.duration,
       }
       fs.writeFileSync(fileStatusPath, JSON.stringify(obj, null, '  '))
       this.logger.info(`Create fileStatus.json: ${JSON.stringify(obj, null, 2)}`)
@@ -217,19 +222,6 @@ export class Recorder {
       const obj = JSON.parse(text.toString()) as FileStatus
       this.isPost = obj.isPost || false
     }
-  }
-
-  private getTitlePostfix() {
-    const hour = parseInt(dayjs().format("HH"))
-
-    if (hour >= 0 && hour < 6) return '凌晨'
-
-    if (hour >= 6 && hour < 12) return '早上'
-
-    if (hour >= 12 && hour < 18) return '下午'
-
-    if (hour >= 18 && hour < 24) return '晚上'
-    return ''
   }
 }
 

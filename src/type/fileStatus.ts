@@ -20,6 +20,7 @@ export interface FileStatus {
     deleteLocalFile?: boolean;
     delayTime?: number;
     videoParts?: videoParts;
+    duration? : number;
 }
 
 interface videoParts {

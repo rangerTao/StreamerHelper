@@ -47,7 +47,8 @@ export interface StreamerInfo {
     copyright: number,
     roomUrl: string,
     tid: number,
-    tags: string[]
+    tags: string[],
+    duration: number
 
 }
 

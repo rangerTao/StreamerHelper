@@ -43,6 +43,8 @@ export default new Scheduler(interval, async function () {
             } catch (e) {
                 throw (`Failed to delete directory: ${obj.path},error: ${e}`)
             }
+        }else{
+            logger.info(`Delay time is not enough to delete file.`)
         }
     }
 
@@ -70,6 +72,7 @@ export default new Scheduler(interval, async function () {
                 roomUrl: obj.recorderLink || '',
                 tid: obj.tid || 0,
                 tags: obj.tags || [],
+                duration : obj.duration || 1
 
             },
             dirName: obj.path,

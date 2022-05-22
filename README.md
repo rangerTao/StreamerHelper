@@ -173,6 +173,7 @@ npm run serve
   - source({{name}} 直播间: {{roomUrl}}): 稿件直播源(需要copyright为2)。
   - dynamic({{name}} 直播间: {{roomUrl}}): 稿件动态。
   - copyright(2): 稿件来源，1 为自制 2 为转载。
+  - duration : 录制时长，每天按照设置时长进行录制(hour)
   - **roomUrl**: 直播间地址。
   - **tid**: 稿件分区，详见[tid表](https://github.com/FortuneDayssss/BilibiliUploader/wiki/Bilibili%E5%88%86%E5%8C%BA%E5%88%97%E8%A1%A8)
   - **tags**: 稿件标签，至少一个，总数量不能超过12个，并且单个不能超过20个字，否则稿件投稿失败
@@ -224,6 +225,7 @@ npm run serve
       "copyright": 2,
       "roomUrl": "https://live.xxx.com/111",
       "tid": 121,
+      "duration" : 1,
       "tags": [
         "tag1",
         "tag2",
@@ -242,6 +244,7 @@ npm run serve
       "copyright": 2,
       "roomUrl": "https://live.xxx.com/222",
       "tid": 171,
+      "duration" : 1,
       "tags": [
         "tag1",
         "tag2",

@@ -1,6 +1,7 @@
 import * as fs from "fs"
 import { join } from 'path'
 import { EventEmitter } from 'events'
+import * as dayjs from "dayjs";
 
 import { log4js } from "@/log/config";
 import { FileStatus } from "@/type/fileStatus";
@@ -11,6 +12,26 @@ export const testRoomTypeArr = (roomType: string) => {
   if (RoomTypeArr.some((type) => type === roomType)) return roomType;
   else return "error";
 };
+
+/**
+ * 获取当前时间戳(秒)
+ */
+export const getTimestamp = function() {
+  return Math.floor(Date.now() / 1000);
+}
+
+export const getTitlePostfix =function() {
+  const hour = parseInt(dayjs().format("HH"))
+
+  if (hour >= 0 && hour < 6) return '凌晨'
+
+  if (hour >= 6 && hour < 12) return '早上'
+
+  if (hour >= 12 && hour < 18) return '下午'
+
+  if (hour >= 18 && hour < 24) return '晚上'
+  return ''
+}
 
 export const FileHound = require("filehound")
 

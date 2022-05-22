@@ -27,6 +27,7 @@ export class App {
     private _user!: User; // will init in initUser()
     private _schedulers: Schedulers;
     private _recorderPool: Map<string, Recorder>;
+    private _durationiPool : Map<string,number>;
     static _i: any;
 
     get logger(): Logger {
@@ -45,10 +46,15 @@ export class App {
         return this._recorderPool
     }
 
+    get durationPool(): Map<string, number>{
+        return this._durationiPool
+    }
+
     constructor() {
         this._logger = getExtendedLogger(`APP`)
         this._schedulers = {}
         this._recorderPool = new Map<string, Recorder>()
+        this._durationiPool = new Map<string, number>()
 
         if (!fs.existsSync(join(process.cwd(), '/download'))) {
             fs.mkdirSync(join(process.cwd(), '/download'))
