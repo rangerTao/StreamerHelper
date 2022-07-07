@@ -38,10 +38,13 @@ export default new Scheduler(interval, async function () {
             dirName: "",
             recorderName: room.name,
             streamUrl: "",
+            introduction : "",
         };
 
         try {
-            recorderTask.streamUrl = await getStreamUrl(room.roomUrl)
+            let checkResult = await getStreamUrl(room.roomUrl)
+            recorderTask.streamUrl = checkResult[0]
+            recorderTask.introduction = checkResult[1]
             // with no-error, the room online
             logger.debug(`stream ${JSON.stringify(recorderTask, null, 2)}`)
             let roomRecordFlag : string = `${room.name}+${dayjs().format("YYYY-MM-DD")}+${getTitlePostfix()}`;
@@ -57,7 +60,7 @@ export default new Scheduler(interval, async function () {
                     if (curRecorder.recorderStat() === false && !stopRecording) {
                         // 房间在线但是直播流断开，重启
                         logger.info(`下载流 ${curRecorder.recorderTask.dirName} 断开，但直播间在线，重启`)
-                        curRecorder.startRecord(recorderTask.streamUrl)
+                        curRecorder.startRecord(checkResult)
                     } else if (curRecorder.recorderStat() === true) {
                         if(stopRecording){
                             logger.info(`达到时长，停止录制`)

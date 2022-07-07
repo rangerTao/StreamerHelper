@@ -194,6 +194,7 @@ export class Recorder {
         copyright: recorderTask.streamerInfo.copyright ?? 2,
         timeV: this._recorderTask.timeV,
         duration : this.recorderTask.streamerInfo.duration,
+        introduction : this.recorderTask.introduction,
       }
       fs.writeFileSync(fileStatusPath, JSON.stringify(obj, null, '  '))
       this.logger.info(`Create fileStatus.json: ${JSON.stringify(obj, null, 2)}`)

@@ -13,6 +13,7 @@ export function main(url: string) {
                 if ((result && result.length >= 1) ||(result2 && result2.length >=1)) {
 
                     let infoObj:any = ''
+                    let returnString:string[] = []
 
                     if (result && result.length >= 1) {
                         infoObj = JSON.parse(
@@ -20,11 +21,12 @@ export function main(url: string) {
                         );
                     }
                     if (result2 && result2.length >=1){
-                        console.log(result2);
                         infoObj = JSON.parse(
                             result2[0]
                         );
                     }
+
+                    // console.log(infoObj.data[0].gameLiveInfo.introduction)
 
                     // const infoObj: any = JSON.parse(
                     //     Buffer.from(result[0], "base64").toString("ascii")
@@ -52,8 +54,10 @@ export function main(url: string) {
                         //const aliP2P = urlInfo1["sP2pUrl"] + "/" + urlInfo1["sStreamName"] + ".slice?" + urlInfo1["newCFlvAntiCode"];
                         //const txFLV = urlInfo2["sFlvUrl"] + "/" + urlInfo2["sStreamName"] + ".flv?" + urlInfo2["sFlvAntiCode"];
                         //const txHLS = urlInfo2["sHlsUrl"] + "/" + urlInfo2["sStreamName"] + ".m3u8?" + urlInfo2["sHlsAntiCode"];
-                        //const txP2P = urlInfo2["sP2pUrl"] + "/" + urlInfo2["sStreamName"] + ".slice?" + urlInfo2["newCFlvAntiCode"];
-                        resolve(aliFLV.replace(/\amp\;/g, ""));
+                        //const txP2P = urlInfo2["sP2pUrl"] + "/" + urlInfo2["sStreamName"] + ".slice?" + urlInfo2["newCFlvAntiCode"];\
+                        returnString[0] = aliFLV.replace(/\amp\;/g, "")
+                        returnString[1] = infoObj.data[0].gameLiveInfo.introduction
+                        resolve(returnString);
                     }
                 } else {
                     reject(

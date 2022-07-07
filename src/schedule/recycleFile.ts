@@ -72,13 +72,13 @@ export default new Scheduler(interval, async function () {
                 roomUrl: obj.recorderLink || '',
                 tid: obj.tid || 0,
                 tags: obj.tags || [],
-                duration : obj.duration || 1
-
+                duration: obj.duration || 1
             },
             dirName: obj.path,
             recorderName: obj.recorderName || '',
             streamUrl: '',
-            timeV: obj.timeV as string
+            timeV: obj.timeV as string,
+            introduction: obj.introduction as string,
         }
 
 

@@ -5,5 +5,6 @@ export interface RecorderTask {
     recorderName: string,
     timeV: string,
     streamUrl: string,
-    dirName: string
+    dirName: string,
+    introduction:string,
 }

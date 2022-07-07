@@ -60,7 +60,7 @@ export class uploader {
         this.source = recorderTask.streamerInfo.source || `${recorderTask.recorderName} 直播间: ${recorderTask.streamerInfo.roomUrl}`
         this.tags = recorderTask.streamerInfo.tags
         this.tid = recorderTask.streamerInfo.tid
-        this.title = `${recorderTask.recorderName} ${recorderTask.timeV} 录播`
+        this.title = `${recorderTask.introduction} ${recorderTask.recorderName} ${recorderTask.timeV} `
             || this.renderTitle(recorderTask.streamerInfo.templateTitle || "", { time: recorderTask.timeV, name: recorderTask.recorderName })
         this.dynamic = recorderTask.streamerInfo.dynamic || `${recorderTask.recorderName} 直播间: ${recorderTask.streamerInfo.roomUrl}`
         this.uploadLocalFile = recorderTask.streamerInfo.uploadLocalFile || true

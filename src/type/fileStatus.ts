@@ -21,6 +21,7 @@ export interface FileStatus {
     delayTime?: number;
     videoParts?: videoParts;
     duration? : number;
+    introduction? : string;
 }
 
 interface videoParts {
