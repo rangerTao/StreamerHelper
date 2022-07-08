@@ -50,7 +50,6 @@ export function main(url: string) {
                         let version: any = result.match(/(?<=v=)(.+)&did/g);
                         version = version.toString().substr(0, version.toString().length - 4)
 
-
                         const post_data: string = `cdn=tct-h5&did=${device_id}&iar=0&ive=0&rate=0&v=${version}&tt=${request_time}&sign=${sign}`
                         axios
                             .post(`https://www.douyu.com/lapi/live/getH5Play/${rid}`, post_data, {
@@ -68,8 +67,15 @@ export function main(url: string) {
                                 if (h5_play_data['error'] != 0) {
                                     reject('DOUYU=>No match results:' + h5_play_data['msg'])
                                 }
+
                                 let stream_url: string = h5_play_data['data']['rtmp_url'] + "/" + h5_play_data['data']['rtmp_live']
-                                resolve(String(stream_url));
+                                
+                                console.log(h5_play_data['data'])
+
+                                let returnString :string[] = []
+                                returnString[0] = String(stream_url)
+                                returnString[1] = "斗鱼主播"
+                                resolve(returnString);
                             })
                             .catch(function (error: any) {
                                 reject(error);

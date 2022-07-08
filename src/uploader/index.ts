@@ -57,12 +57,12 @@ export class uploader {
         this.desc = recorderTask.streamerInfo.desc || `Powered By StreamerHelper. https://github.com/ZhangMingZhao1/StreamerHelper`
         this.no_reprint = 0
         this.open_elec = 1
-        this.source = recorderTask.streamerInfo.source || `${recorderTask.recorderName} 直播间: ${recorderTask.streamerInfo.roomUrl}`
         this.tags = recorderTask.streamerInfo.tags
         this.tid = recorderTask.streamerInfo.tid
         this.title = `${recorderTask.introduction} ${recorderTask.recorderName} ${recorderTask.timeV} `
             || this.renderTitle(recorderTask.streamerInfo.templateTitle || "", { time: recorderTask.timeV, name: recorderTask.recorderName })
-        this.dynamic = recorderTask.streamerInfo.dynamic || `${recorderTask.recorderName} 直播间: ${recorderTask.streamerInfo.roomUrl}`
+        this.dynamic = this.title
+        this.source = this.title
         this.uploadLocalFile = recorderTask.streamerInfo.uploadLocalFile || true
         this.recorderName = recorderTask.recorderName || ''
         this.deadline = 0
